@@ -33,12 +33,15 @@ const HomeScreen = () => {
 
   const renderListHeader = () => {
     return (
-      <View style={{marginTop: top + 20}}>
+      <View style={{marginTop: top + 20, marginBottom: 20}}>
         <Text style={styles.title}>Opciones de menú</Text>
       </View>
     );
   };
 
+  const itemSeparator = () => {
+    return <View style={{borderBottomWidth: 2, opacity:0.5,marginVertical:8}} />;
+  };
   return (
     <View style={{flex: 1, ...styles.globalMargin}}>
       <FlatList
@@ -48,6 +51,7 @@ const HomeScreen = () => {
         // Llave unica en cada uno de los elementos
         keyExtractor={item => item.name}
         ListHeaderComponent={() => renderListHeader()}
+        ItemSeparatorComponent={itemSeparator}
       />
     </View>
   );
