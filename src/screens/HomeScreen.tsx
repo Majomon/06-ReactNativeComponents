@@ -1,16 +1,11 @@
 import {View, Text, FlatList} from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from '../theme/appTheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {MenuItem} from '../interfaces/appInterfaces';
+import FlatListMenuItem from '../components/FlatListMenuItem';
 
-interface MenuItem {
-  name: string;
-  icon: string;
-  components: string;
-}
-
-const menuItems = [
+const menuItems: MenuItem[] = [
   {name: 'Animación 1', icon: 'cube-outline', components: 'Animation101Screen'},
   {
     name: 'Animación 2',
@@ -21,15 +16,6 @@ const menuItems = [
 
 const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
-  const renderMenuItem = (menuItem: MenuItem) => {
-    return (
-      <View>
-        <Text style={styles.parrafo}>
-          {menuItem.name} - {menuItem.icon}
-        </Text>
-      </View>
-    );
-  };
 
   const renderListHeader = () => {
     return (
@@ -40,14 +26,16 @@ const HomeScreen = () => {
   };
 
   const itemSeparator = () => {
-    return <View style={{borderBottomWidth: 2, opacity:0.5,marginVertical:8}} />;
+    return (
+      <View style={{borderBottomWidth: 2, opacity: 0.5, marginVertical: 8}} />
+    );
   };
   return (
     <View style={{flex: 1, ...styles.globalMargin}}>
       <FlatList
         data={menuItems}
         // Renderizar cada uno de los elementos - Como un map
-        renderItem={({item}) => renderMenuItem(item)}
+        renderItem={({item}) => <FlatListMenuItem menuItem={item} />}
         // Llave unica en cada uno de los elementos
         keyExtractor={item => item.name}
         ListHeaderComponent={() => renderListHeader()}

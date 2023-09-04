@@ -9,8 +9,4 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
   },
-  parrafo: {
-    color: 'black',
-    fontSize: 20,
-  },
 });
