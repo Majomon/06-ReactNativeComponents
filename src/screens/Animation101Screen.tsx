@@ -9,9 +9,9 @@ const Animation101Screen = () => {
       //Valor al que necesito que llegue
       toValue: 1,
       //Lo que va a durar :D en milisegundos
-      duration: 300,
+      duration: 1000,
       useNativeDriver: true,
-    }).start();
+    }).start(() => console.log('Termino de cargar la animación FadeIn'));
   };
 
   const fadeOut = () => {
@@ -19,9 +19,9 @@ const Animation101Screen = () => {
       //Valor al que necesito que llegue
       toValue: 0,
       //Lo que va a durar :D en milisegundos
-      duration: 300,
+      duration: 1000,
       useNativeDriver: true,
-    }).start();
+    }).start(() => console.log('Termino de cargar la animación FadeOut'));
   };
 
   return (
