@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {TextInput, View, StyleSheet} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import {styles} from '../theme/appTheme';
 
@@ -15,36 +23,44 @@ export const TextInputScreen = () => {
   };
 
   return (
-    <View style={styles.globalMargin}>
-      <HeaderTitle title="TextInputs" />
-      <TextInput
-        style={stylesScreen.textInput}
-        placeholder="Ingrese su nombre"
-        placeholderTextColor="black"
-        //Para que no me marque error de autocompletado
-        autoCorrect={false}
-        autoCapitalize="words"
-        onChangeText={value => onChange(value, 'name')}
-      />
-      <TextInput
-        style={stylesScreen.textInput}
-        placeholder="Ingrese su email"
-        placeholderTextColor="black"
-        autoCorrect={false}
-        autoCapitalize="none"
-        onChangeText={value => onChange(value, 'email')}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={stylesScreen.textInput}
-        placeholder="Ingrese su teléfono"
-        placeholderTextColor="black"
-        onChangeText={value => onChange(value, 'phone')}
-        keyboardType="phone-pad"
+    <KeyboardAvoidingView>
+      <ScrollView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.globalMargin}>
+            <HeaderTitle title="TextInputs" />
+            <TextInput
+              style={stylesScreen.textInput}
+              placeholder="Ingrese su nombre"
+              placeholderTextColor="black"
+              //Para que no me marque error de autocompletado
+              autoCorrect={false}
+              autoCapitalize="words"
+              onChangeText={value => onChange(value, 'name')}
+            />
+            <TextInput
+              style={stylesScreen.textInput}
+              placeholder="Ingrese su email"
+              placeholderTextColor="black"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={value => onChange(value, 'email')}
+              keyboardType="email-address"
+            />
+            <HeaderTitle title={JSON.stringify(form, null, 3)} />
+            <HeaderTitle title={JSON.stringify(form, null, 3)} />
 
-      />
-      <HeaderTitle title={JSON.stringify(form, null, 3)} />
-    </View>
+            <TextInput
+              style={stylesScreen.textInput}
+              placeholder="Ingrese su teléfono"
+              placeholderTextColor="black"
+              onChangeText={value => onChange(value, 'phone')}
+              keyboardType="phone-pad"
+            />
+          <View style={{height: 100}} />
+          </View>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
