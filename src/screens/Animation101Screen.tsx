@@ -1,45 +1,10 @@
-import React, {useRef} from 'react';
-import {Animated, Button, Easing, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {Animated, Button, StyleSheet, View} from 'react-native';
+import {useAnimation} from '../hooks/useAnimation';
 
 const Animation101Screen = () => {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const top = useRef(new Animated.Value(-100)).current;
-
-  const fadeIn = () => {
-    Animated.timing(opacity, {
-      //Valor al que necesito que llegue
-      toValue: 1,
-      //Lo que va a durar :D en milisegundos
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => console.log('Termino de cargar la animación FadeIn'));
-
-    Animated.timing(top, {
-      toValue: 0,
-      duration: 1000,
-      useNativeDriver: true,
-      // Efectos - EASING
-      easing: Easing.bounce,
-
-/*       easing: Easing.elastic(3), */
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(opacity, {
-      //Valor al que necesito que llegue
-      toValue: 0,
-      //Lo que va a durar :D en milisegundos
-      duration: 1000,
-      useNativeDriver: true,
-    }).start(() => console.log('Termino de cargar la animación FadeOut'));
-
-    Animated.timing(top, {
-      toValue: -100,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  };
+  const {fadeIn, fadeOut, opacity, position, startMovingPosition} =
+    useAnimation();
 
   return (
     <View style={styles.container}>
@@ -48,11 +13,17 @@ const Animation101Screen = () => {
           ...styles.purpleBox,
           opacity,
           marginBottom: 20,
-          transform: [{translateY: top}],
+          transform: [{translateY: position}],
         }}
       />
       <View style={styles.btn}>
-        <Button title="FaseIn" onPress={fadeIn} />
+        <Button
+          title="FaseIn"
+          onPress={() => {
+            fadeIn();
+            startMovingPosition(-100, 3000);
+          }}
+        />
       </View>
       <View style={styles.btn}>
         <Button title="FaseOut" onPress={fadeOut} />
