@@ -1,18 +1,9 @@
-import {View, Text, FlatList} from 'react-native';
 import React from 'react';
-import {styles} from '../theme/appTheme';
+import {FlatList, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {MenuItem} from '../interfaces/appInterfaces';
 import FlatListMenuItem from '../components/FlatListMenuItem';
-
-const menuItems: MenuItem[] = [
-  {name: 'Animación 1', icon: 'cube-outline', component: 'Animation101Screen'},
-  {
-    name: 'Animación 2',
-    icon: 'game-controller-outline',
-    component: 'Animation102Screen',
-  },
-];
+import {styles} from '../theme/appTheme';
+import { menuItems } from '../data/menuItems';
 
 const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
