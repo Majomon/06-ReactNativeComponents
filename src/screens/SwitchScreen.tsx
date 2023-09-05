@@ -10,7 +10,8 @@ export const SwitchScreen = () => {
     isHappy: true,
   });
 
-  const {isActive, isHappy, isHungry} = state;
+  const {isActive, isHungry, isHappy} = state;
+
   const onChange = (value: boolean, field: string) => {
     setState({...state, [field]: value});
   };
@@ -23,6 +24,20 @@ export const SwitchScreen = () => {
         <CustomSwitch
           isOn={isActive}
           onChange={value => onChange(value, 'isActive')}
+        />
+      </View>
+      <View style={styles.switchRow}>
+        <Text style={styles.infoSwitch}>Is Hungry</Text>
+        <CustomSwitch
+          isOn={isHungry}
+          onChange={value => onChange(value, 'isHungry')}
+        />
+      </View>
+      <View style={styles.switchRow}>
+        <Text style={styles.infoSwitch}>Is Happy</Text>
+        <CustomSwitch
+          isOn={isHappy}
+          onChange={value => onChange(value, 'isHappy')}
         />
       </View>
 
@@ -39,6 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginVertical: 10,
   },
   infoSwitch: {
     color: 'black',
