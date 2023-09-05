@@ -6,11 +6,11 @@ import {MenuItem} from '../interfaces/appInterfaces';
 import FlatListMenuItem from '../components/FlatListMenuItem';
 
 const menuItems: MenuItem[] = [
-  {name: 'Animación 1', icon: 'cube-outline', components: 'Animation101Screen'},
+  {name: 'Animación 1', icon: 'cube-outline', component: 'Animation101Screen'},
   {
     name: 'Animación 2',
     icon: 'game-controller-outline',
-    components: 'Animation102Screen',
+    component: 'Animation102Screen',
   },
 ];
 
