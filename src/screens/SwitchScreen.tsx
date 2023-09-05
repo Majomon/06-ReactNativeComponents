@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Switch, StyleSheet} from 'react-native';
+import HeaderTitle from '../components/HeaderTitle';
 
 export const SwitchScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -7,6 +8,7 @@ export const SwitchScreen = () => {
 
   return (
     <View style={styles.container}>
+      <HeaderTitle title="Switches" />
       <Switch
         trackColor={{false: '#D9D9DB', true: '#5658D6'}}
         thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
@@ -20,8 +22,9 @@ export const SwitchScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    /*     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center', */
+    marginHorizontal: 20,
   },
 });
