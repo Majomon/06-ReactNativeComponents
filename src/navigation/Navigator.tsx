@@ -18,9 +18,10 @@ export const Navigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        // Titulo de la pantalla donde me encuentro
         headerShown: false,
         cardStyle: {
-          backgroundColor: 'white',
+          /*           backgroundColor: 'white', */
         },
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
