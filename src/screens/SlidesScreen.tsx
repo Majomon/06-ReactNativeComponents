@@ -1,23 +1,29 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import {View} from 'react-native';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
+  Image,
   ImageSourcePropType,
   SafeAreaView,
+  StyleSheet,
   Text,
-  Image,
+  TouchableOpacity,
+  View,
+  Animated,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {useState} from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useAnimation} from '../hooks/useAnimation';
+import {StackScreenProps} from '@react-navigation/stack';
 
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+const {width: screenWidth} = Dimensions.get('window');
 
 interface Slide {
   title: string;
   desc: string;
   img: ImageSourcePropType;
 }
+
+interface Props extends StackScreenProps<any, any> {}
 
 const items: Slide[] = [
   {
@@ -37,8 +43,10 @@ const items: Slide[] = [
   },
 ];
 
-export const SlidesScreen = () => {
+export const SlidesScreen = ({navigation}: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const {fadeIn, opacity} = useAnimation();
+  const isVisible = useRef(false);
 
   const renderItem = (item: Slide) => {
     return (
@@ -74,21 +82,55 @@ export const SlidesScreen = () => {
         //Para indicar en que pagina activa se esta
         onSnapToItem={index => {
           setActiveIndex(index);
+          if (index === 2) {
+            isVisible.current = true;
+            fadeIn();
+          }
         }}
       />
-      <Pagination
-        //Cuantos elementos quiero que tenga
-        dotsLength={items.length}
-        //Pagina actual
-        activeDotIndex={activeIndex}
-        //Color
-        dotStyle={{
-          width: 20,
-          height: 20,
-          borderRadius: 10,
-          backgroundColor: '#5856D6',
-        }}
-      />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginHorizontal: 20,
+          alignItems: 'center',
+        }}>
+        <Pagination
+          //Cuantos elementos quiero que tenga
+          dotsLength={items.length}
+          //Pagina actual
+          activeDotIndex={activeIndex}
+          //Color
+          dotStyle={{
+            width: 20,
+            height: 20,
+            borderRadius: 10,
+            backgroundColor: '#5856D6',
+          }}
+        />
+
+        <Animated.View style={{opacity}}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              backgroundColor: '#5856D6',
+              width: 140,
+              height: 50,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            activeOpacity={0.7}
+            onPress={() => {
+              if (isVisible.current) {
+                navigation.navigate('HomeScreen');
+              }
+            }}>
+            <Text style={{fontSize: 25, color: 'white'}}>Entrar</Text>
+            <Icon name="chevron-forward-outline" size={35} color="white" />
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     </SafeAreaView>
   );
 };
