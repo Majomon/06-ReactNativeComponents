@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AlertScreen} from '../screens/AlertScreen';
@@ -14,12 +14,14 @@ import {TextInputScreen} from '../screens/TextInputScreen';
 import {ChangeThemeScreen} from '../screens/ChangeThemeScreen';
 import {NavigationContainer} from '@react-navigation/native';
 
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+
 const Stack = createStackNavigator();
 
 export const Navigator = () => {
-  
+  const {theme} = useContext(ThemeContext);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator
         screenOptions={{
           // Titulo de la pantalla donde me encuentro
