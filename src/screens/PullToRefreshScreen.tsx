@@ -1,13 +1,27 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, View, RefreshControl} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import {styles} from '../theme/appTheme';
 
 export const PullToRefreshScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      console.log('Terminamos');
+      setRefreshing(false);
+    }, 1500);
+  };
   return (
-    <View style={styles.globalMargin}>
-      <HeaderTitle title="Pull to refresh" />
-    </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <View style={styles.globalMargin}>
+        <HeaderTitle title="Pull to refresh" />
+      </View>
+    </ScrollView>
   );
 };
 
