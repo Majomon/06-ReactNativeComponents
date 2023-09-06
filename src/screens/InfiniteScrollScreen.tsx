@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import {FadeInImage} from '../components/FadeInImage';
 import HeaderTitle from '../components/HeaderTitle';
 
@@ -18,7 +18,10 @@ export const InfiniteScrollScreen = () => {
   };
   const renderItem = (item: number) => {
     return (
-      <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} />
+      <FadeInImage
+        uri={`https://picsum.photos/id/${item}/500/400`}
+        style={{width: '100%', height: 400}}
+      />
       /*       <Image
         source={{uri: `https://picsum.photos/id/${item}/500/400`}}
         style={{
@@ -35,7 +38,11 @@ export const InfiniteScrollScreen = () => {
         data={numbers}
         keyExtractor={item => item.toString()} // Espera recibir un string pero recibe un número, por eso el toString()
         renderItem={({item}) => renderItem(item)}
-        ListHeaderComponent={<HeaderTitle title="Infinite Scroll" />}
+        ListHeaderComponent={() => (
+          <View style={{marginHorizontal: 20}}>
+            <HeaderTitle title="Infinite Scroll" />
+          </View>
+        )}
         // Cuando se llega al final
         onEndReached={loadMore}
         // Que tan cerca del fondo debo estar para disparar nuevamente esta función -> onEndReached
@@ -55,10 +62,3 @@ export const InfiniteScrollScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textItem: {
-    backgroundColor: 'green',
-    height: 150,
-  },
-});
