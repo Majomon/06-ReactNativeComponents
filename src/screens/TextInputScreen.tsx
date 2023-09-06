@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
+  Text,
   TextInput,
-  View,
   TouchableWithoutFeedback,
-  Keyboard,
+  View,
 } from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
+import {useForm} from '../hooks/useForm';
 import {styles} from '../theme/appTheme';
+import {CustomSwitch} from '../components/CustomSwitch';
 
 export const TextInputScreen = () => {
-  const [form, setForm] = useState({
+  const {form, onChange, isSuscribe} = useForm({
     name: '',
     email: '',
     phone: '',
+    isSuscribe: false,
   });
-
-  const onChange = (value: string, field: string) => {
-    setForm({...form, [field]: value});
-  };
 
   return (
     <KeyboardAvoidingView>
@@ -46,6 +46,13 @@ export const TextInputScreen = () => {
               onChangeText={value => onChange(value, 'email')}
               keyboardType="email-address"
             />
+            <View style={stylesScreen.switchRow}>
+              <Text style={stylesScreen.infoSwitch}>Suscribirse</Text>
+              <CustomSwitch
+                isOn={isSuscribe}
+                onChange={value => onChange(value, 'isSuscribe')}
+              />
+            </View>
             <HeaderTitle title={JSON.stringify(form, null, 3)} />
             <HeaderTitle title={JSON.stringify(form, null, 3)} />
 
@@ -56,7 +63,7 @@ export const TextInputScreen = () => {
               onChangeText={value => onChange(value, 'phone')}
               keyboardType="phone-pad"
             />
-          <View style={{height: 100}} />
+            <View style={{height: 100}} />
           </View>
         </TouchableWithoutFeedback>
       </ScrollView>
@@ -74,5 +81,15 @@ const stylesScreen = StyleSheet.create({
     /*    borderColor: 'rgba(0,0,0,0.3)', */
     padding: 10,
     marginVertical: 5,
+  },
+  switchRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  infoSwitch: {
+    color: 'black',
+    fontSize: 25,
   },
 });
