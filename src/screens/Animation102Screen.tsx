@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {Animated, PanResponder, StyleSheet, View} from 'react-native';
 
-const Animation102Screen = () => {
+export const Animation102Screen = () => {
   const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = PanResponder.create({
@@ -27,8 +27,6 @@ const Animation102Screen = () => {
     </View>
   );
 };
-
-export default Animation102Screen;
 
 const styles = StyleSheet.create({
   container: {

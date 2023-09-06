@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, Button, StyleSheet, View} from 'react-native';
 import {useAnimation} from '../hooks/useAnimation';
 
-const Animation101Screen = () => {
+export const Animation101Screen = () => {
   const {fadeIn, fadeOut, opacity, position, startMovingPosition} =
     useAnimation();
 
@@ -31,8 +31,6 @@ const Animation101Screen = () => {
     </View>
   );
 };
-
-export default Animation101Screen;
 
 const styles = StyleSheet.create({
   container: {
