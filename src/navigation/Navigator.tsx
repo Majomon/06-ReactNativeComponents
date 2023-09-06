@@ -11,6 +11,7 @@ import {PullToRefreshScreen} from '../screens/PullToRefreshScreen';
 import {SlidesScreen} from '../screens/SlidesScreen';
 import {SwitchScreen} from '../screens/SwitchScreen';
 import {TextInputScreen} from '../screens/TextInputScreen';
+import {ChangeThemeScreen} from '../screens/ChangeThemeScreen';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,7 @@ export const Navigator = () => {
         component={InfiniteScrollScreen}
       />
       <Stack.Screen name="SlidesScreen" component={SlidesScreen} />
+      <Stack.Screen name="ChangeThemeScreen" component={ChangeThemeScreen} />
     </Stack.Navigator>
   );
 };
