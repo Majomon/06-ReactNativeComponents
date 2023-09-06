@@ -8,7 +8,8 @@ import {
   Text,
   Image,
 } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {useState} from 'react';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -37,6 +38,8 @@ const items: Slide[] = [
 ];
 
 export const SlidesScreen = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const renderItem = (item: Slide) => {
     return (
       <View
@@ -68,6 +71,23 @@ export const SlidesScreen = () => {
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         layout="default"
+        //Para indicar en que pagina activa se esta
+        onSnapToItem={index => {
+          setActiveIndex(index);
+        }}
+      />
+      <Pagination
+        //Cuantos elementos quiero que tenga
+        dotsLength={items.length}
+        //Pagina actual
+        activeDotIndex={activeIndex}
+        //Color
+        dotStyle={{
+          width: 20,
+          height: 20,
+          borderRadius: 10,
+          backgroundColor: '#5856D6',
+        }}
       />
     </SafeAreaView>
   );
