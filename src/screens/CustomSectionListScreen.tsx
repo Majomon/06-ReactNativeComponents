@@ -3,6 +3,8 @@ import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {styles} from '../theme/appTheme';
 import HeaderTitle from '../components/HeaderTitle';
 import {ItemSeparator} from '../components/ItemSeparator';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {useContext} from 'react';
 
 interface Casas {
   casa: string;
@@ -80,6 +82,10 @@ const casas: Casas[] = [
 ];
 
 export const CustomSectionListScreen = () => {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
+
   return (
     <View style={{...styles.globalMargin, flex: 1}}>
       <SectionList
@@ -92,12 +98,16 @@ export const CustomSectionListScreen = () => {
             <HeaderTitle title={`Total de casas ` + casas.length} />
           </View>
         )}
-        renderItem={({item}) => <Text style={stylesSection.text}>{item}</Text>}
+        renderItem={({item}) => (
+          <Text style={{...stylesSection.text, color: colors.text}}>
+            {item}
+          </Text>
+        )}
         /*     stickySectionHeadersEnabled={true} */
         stickySectionHeadersEnabled
         //Renders
         renderSectionHeader={({section}) => (
-          <View style={{backgroundColor: 'white'}}>
+          <View style={{backgroundColor: colors.background}}>
             <HeaderTitle title={section.casa} />
           </View>
         )}
@@ -117,7 +127,6 @@ export const CustomSectionListScreen = () => {
 
 const stylesSection = StyleSheet.create({
   text: {
-    color: 'black',
     fontSize: 18,
   },
 });

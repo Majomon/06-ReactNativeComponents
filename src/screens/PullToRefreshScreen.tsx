@@ -2,10 +2,16 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View, RefreshControl, Text} from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import {styles} from '../theme/appTheme';
+import {ThemeContext} from '../context/themeContext/ThemeContext';
+import {useContext} from 'react';
 
 export const PullToRefreshScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState<string>();
+
+  const {
+    theme: {colors, dividerColor},
+  } = useContext(ThemeContext);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -24,9 +30,10 @@ export const PullToRefreshScreen = () => {
           //Hasta donde va a bajar en el eje Y el loading
           progressViewOffset={10}
           //Color del círculo
-          progressBackgroundColor="grey"
+          progressBackgroundColor={dividerColor}
           //Gradiente de colores
-          colors={['white', 'yellow', 'orange']}
+          //colors={['white', 'yellow', 'orange']}
+          colors={[colors.text]}
         />
       }>
       <View style={styles.globalMargin}>
